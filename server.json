@@ -3,26 +3,26 @@
     {
       "id": 1,
       "name": "Ao molho",
-      "description": "Macarrão ao molho branco, fughi e cheiro verde das montanhas.",
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
       "price": "19.90",
-      "available": true,
-      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png"
+      "description": "Macarrão ao molho branco, fughi e cheiro verde das montanhas.",
+      "available": true
     },
     {
       "id": 2,
       "name": "Veggie",
-      "description": "Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.",
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png",
       "price": "21.90",
-      "available": true,
-      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png"
+      "description": "Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.",
+      "available": true
     },
     {
       "id": 3,
       "name": "A la Camarón",
-      "description": "Macarrão com vegetais de primeira linha e camarão dos 7 mares.",
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food3.png",
       "price": "25.90",
-      "available": true,
-      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food3.png"
+      "description": "Macarrão com vegetais de primeira linha e camarão dos 7 mares.",
+      "available": true
     }
   ]
 }

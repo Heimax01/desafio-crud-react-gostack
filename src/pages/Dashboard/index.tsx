@@ -27,7 +27,11 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
-      // TODO LOAD FOODS
+      // TO-DO LOAD FOODS
+      const { data } = await api.get('foods');
+
+      // console.log(response.data);
+      setFoods(data);
     }
 
     loadFoods();
@@ -37,7 +41,25 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     try {
-      // TODO ADD A NEW FOOD PLATE TO THE API
+      // TO-DO ADD A NEW FOOD PLATE TO THE API
+      const maxId = foods.reduce((actualValue, actualFood) => {
+        if (actualValue < actualFood.id) {
+          return actualFood.id;
+        }
+        return actualValue;
+      }, 0);
+
+      const newFood = {
+        id: maxId + 1,
+        name: food.name,
+        image: food.image,
+        price: food.price,
+        description: food.description,
+        available: true,
+      };
+      await api.post('/foods', newFood);
+
+      setFoods([...foods, newFood]);
     } catch (err) {
       console.log(err);
     }
@@ -46,11 +68,44 @@ const Dashboard: React.FC = () => {
   async function handleUpdateFood(
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
-    // TODO UPDATE A FOOD PLATE ON THE API
+    // TO-DO DELETE A FOOD PLATE FROM THE API
+
+    // console.log(editingFood);
+
+    const indexFood = foods.findIndex(
+      actualfood => actualfood.id === editingFood.id,
+    );
+
+    const updateFoodList = [...foods];
+
+    const updatedFood: IFoodPlate = {
+      id: editingFood.id,
+      name: food.name,
+      image: food.image,
+      price: food.price,
+      description: food.description,
+      available: editingFood.available,
+    };
+
+    await api.put(`foods/${editingFood.id}`, updatedFood);
+
+    updateFoodList[indexFood] = updatedFood;
+
+    setFoods(updateFoodList);
   }
 
   async function handleDeleteFood(id: number): Promise<void> {
-    // TODO DELETE A FOOD PLATE FROM THE API
+    // TO-DO DELETE A FOOD PLATE FROM THE API
+    const indexFood = foods.findIndex(food => food.id === id);
+
+    if (indexFood >= 0) {
+      const newFoodsList = [...foods];
+
+      await api.delete(`/foods/${id}`);
+
+      newFoodsList.splice(indexFood, 1);
+      setFoods(newFoodsList);
+    }
   }
 
   function toggleModal(): void {
@@ -62,7 +117,9 @@ const Dashboard: React.FC = () => {
   }
 
   function handleEditFood(food: IFoodPlate): void {
-    // TODO SET THE CURRENT EDITING FOOD ID IN THE STATE
+    // TO-DO SET THE CURRENT EDITING FOOD ID IN THE STATE
+    setEditingFood(food);
+    setEditModalOpen(true);
   }
 
   return (
